@@ -14,13 +14,21 @@ struct ContentView: View {
     }
     
     @State var selectedIndex = 0
+    @State var shouldShowModal = false
     
     let tabBarImageNames = ["person", "gear", "plus.app.fill", "pencil", "lasso"]
     
     var body: some View {
         
-        VStack {
+        VStack(spacing: 0) {
             ZStack {
+                
+                Spacer()
+                    .fullScreenCover(isPresented: $shouldShowModal, content: {
+                        Button(action: {shouldShowModal.toggle()}, label: {
+                            Text("Full Screen Cover")
+                        })
+                    })
                 
                 switch selectedIndex {
                 case 0:
@@ -33,15 +41,25 @@ struct ContentView: View {
                         Text("Test")
                     }
                 default:
-                    Text("Remaining Tabs")
+                    // We add navigation views by default will take up the entire span of the actual screen space
+                    NavigationView {
+                        Text("Remaining Tabs")
+                    }
                 }
                 
             }
-            Spacer()
+//            Spacer()
+            
+            Divider()
+                .padding(.bottom, 12)
             
             HStack {
                 ForEach(0..<5) { num in
                     Button(action: {
+                        if num == 2 {
+                            shouldShowModal.toggle()
+                            return
+                        }
                         selectedIndex = num
                     }, label: {
                         Spacer()

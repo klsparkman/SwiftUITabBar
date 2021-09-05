@@ -32,23 +32,41 @@ struct ContentView: View {
                 
                 switch selectedIndex {
                 case 0:
-                    NavigationView {
-                        Text("First")
-                            .navigationTitle("First Tab")
+                        NavigationView {
+                            ZStack {
+                            Color.red.edgesIgnoringSafeArea(.all)
+                            Text("First")
+                                .navigationTitle("First Tab")
+                        }
                     }
                 case 1:
-                    ScrollView {
-                        Text("Test")
+                    NavigationView {
+                        ZStack {
+                        Color.blue.edgesIgnoringSafeArea(.all)
+                        Text("Second")
+                            .navigationTitle("Second Tab")
                     }
+                }
+                case 3:
+                    NavigationView {
+                        ZStack {
+                        Color.green.edgesIgnoringSafeArea(.all)
+                        Text("Fourth")
+                            .navigationTitle("Fourth Tab")
+                    }
+                }
                 default:
                     // We add navigation views by default will take up the entire span of the actual screen space
                     NavigationView {
-                        Text("Remaining Tabs")
+                        ZStack {
+                            Color.orange.edgesIgnoringSafeArea(.all)
+                            Text("Remaining Tabs")
+                                .navigationTitle("Remaining Tabs")
+                        }
                     }
                 }
                 
             }
-//            Spacer()
             
             Divider()
                 .padding(.bottom, 12)
